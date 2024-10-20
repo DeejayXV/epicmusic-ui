@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./AuthForm.css";
 
 function LoginPage() {
-  const [credentials, setCredentials] = useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/api/auth/login", credentials);
+      const response = await axios.post("http://localhost:3001/api/auth/login", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (response.status === 200) {
-        alert("Login effettuato con successo!");
-        // Salva il token JWT nella memoria locale per le richieste future
-        localStorage.setItem("token", response.data.token);
+        alert("Login avvenuto con successo!");
       }
     } catch (error) {
       console.error("Errore durante il login", error);
@@ -28,17 +31,14 @@ function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username</label>
-        <input type="text" name="username" value={credentials.username} onChange={handleChange} required />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-      </div>
-      <button type="submit">Accedi</button>
-    </form>
+    <div className="register">
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+        <button type="submit">Accedi</button>
+      </form>
+    </div>
   );
 }
 
