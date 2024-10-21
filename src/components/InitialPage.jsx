@@ -4,7 +4,7 @@ import './InitialPage.css';
 
 const InitialPage = () => {
   return (
-    <div className="initial-container">
+    <div className="home-container">
       <div className="overlay"></div>
       <div className="content">
         <h1 className="title">Benvenuti su EpicMusic</h1>
