@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AuthForm.css";
 
@@ -7,6 +8,7 @@ function LoginPage({ setIsAuthenticated }) {
     username: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +25,8 @@ function LoginPage({ setIsAuthenticated }) {
       });
       if (response.status === 200) {
         alert("Login avvenuto con successo!");
-        setIsAuthenticated(true); // Imposta l'utente come autenticato dopo un login riuscito
+        setIsAuthenticated(true);
+        navigate("/"); // Reindirizza al feed dopo il login
       }
     } catch (error) {
       console.error("Errore durante il login", error);

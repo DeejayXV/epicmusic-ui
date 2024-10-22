@@ -1,8 +1,11 @@
-.app {
+.app-container {
   display: flex;
+  height: 100vh;
 }
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }

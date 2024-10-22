@@ -1,29 +1,31 @@
 .sidebar {
-  width: 200px;
-  background-color: #2c2c2c;
-  color: #fff;
+  width: 240px;
+  background-color: #121212;
+  color: white;
   padding: 20px;
-  height: 100vh;
 }
 
-.sidebar h2 {
-  color: #f39c12;
+.menu a {
+  display: block;
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
 }
 
-.sidebar ul {
+.menu a:hover {
+  background-color: #1db954;
+  border-radius: 5px;
+}
+
+.user-playlists ul {
   list-style: none;
   padding: 0;
 }
 
-.sidebar ul li {
-  margin: 20px 0;
-}
-
-.sidebar ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.sidebar ul li a:hover {
-  color: #f39c12;
+.create-playlist {
+  background: #1db954;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 }
