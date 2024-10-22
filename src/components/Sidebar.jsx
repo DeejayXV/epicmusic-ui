@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h2 className="brand">EpicMusic</h2>
       <nav className="menu">
         <Link to="/">Feed</Link>
         <Link to="/playlists">Playlists</Link>

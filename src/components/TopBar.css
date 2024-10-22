@@ -1,0 +1,11 @@
+.top-bar {
+  z-index: 1040;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.avatar {
+  width: 20px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
