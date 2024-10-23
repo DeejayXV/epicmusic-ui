@@ -12,10 +12,29 @@ const Sidebar = () => {
     description: '',
   });
 
+  // Funzione per aprire il modal
+  const handleModalShow = () => setShowModal(true);
+
+  // Funzione per chiudere il modal
+  const handleModalClose = () => {
+    setShowModal(false);
+    setNewPlaylistData({ name: '', description: '' });
+  };
+
+  // Funzione per gestire il cambiamento di input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPlaylistData({ ...newPlaylistData, [name]: value });
+  };
+
+  // Funzione per recuperare le playlist dell'utente
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
         const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found');
+        }
         const response = await axios.get('http://localhost:3001/api/playlists', {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -29,20 +48,13 @@ const Sidebar = () => {
     fetchPlaylists();
   }, []);
 
-  const handleModalShow = () => setShowModal(true);
-  const handleModalClose = () => {
-    setShowModal(false);
-    setNewPlaylistData({ name: '', description: '' });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPlaylistData({ ...newPlaylistData, [name]: value });
-  };
-
+  // Funzione per creare una nuova playlist
   const createNewPlaylist = async () => {
     try {
       const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token not found');
+      }
       const response = await axios.post(
         'http://localhost:3001/api/playlists',
         newPlaylistData,

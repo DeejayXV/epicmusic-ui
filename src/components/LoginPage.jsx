@@ -24,10 +24,10 @@ function LoginPage({ setIsAuthenticated }) {
         },
       });
       if (response.status === 200) {
-        const token = response.data.token; 
+        const token = response.data.token;
         localStorage.setItem('token', token);
         setIsAuthenticated(true);
-        navigate("/");
+        navigate('/');
       }
     } catch (error) {
       console.error("Errore durante il login", error);
