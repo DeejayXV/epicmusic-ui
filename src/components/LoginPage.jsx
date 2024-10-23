@@ -24,11 +24,11 @@ function LoginPage({ setIsAuthenticated }) {
         },
       });
       if (response.status === 200) {
-        const token = response.data.token; // Assumendo che il token sia nella risposta
+        const token = response.data.token; 
         localStorage.setItem('token', token);
         setIsAuthenticated(true);
+        navigate("/");
       }
-      
     } catch (error) {
       console.error("Errore durante il login", error);
       alert("Login fallito");
