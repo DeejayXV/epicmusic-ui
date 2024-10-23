@@ -6,22 +6,26 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <nav className="menu">
-        <Link to="/">Feed</Link>
-        <Link to="/playlists">Playlists</Link>
-        <Link to="/statistics">Statistics</Link>
-        <Link to="/favorites">Favourites</Link>
-        <Link to="/history">History</Link>
+        <Link to="/">Home</Link>
+        </nav>
+        <h4 className='miniTitle mt-4'>My Collection</h4>
+        <nav className="menu">
+        <Link to="/albums">Albums</Link>
+        <Link to="/tracks">Tracks</Link>
+        <Link to="/videos">Videos</Link>
+        <Link to="/artists">Artists</Link>
         <Link to="/podcasts">Podcasts</Link>
-      </nav>
+        </nav>
       <div className="user-playlists">
-        <h3>Your Playlists</h3>
+        <h4 className='miniTitle mt-4'>Your Playlists</h4>
+        <button className="create-playlist"> New Playlist + </button>
         <ul>
           <li>Electro</li>
           <li>Funk</li>
           <li>Metalcore</li>
           <li>Disco</li>
         </ul>
-        <button className="create-playlist">Create new playlist +</button>
+        
       </div>
     </div>
   );
