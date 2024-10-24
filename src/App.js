@@ -16,18 +16,38 @@ import "./App.css";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentTrackUri, setCurrentTrackUri] = useState(null); // Stato per la traccia attualmente in riproduzione
+  const [currentTrack, setCurrentTrack] = useState(null); // Stato per la traccia attualmente in riproduzione
+  const [trackList, setTrackList] = useState([]); // Stato per la lista delle tracce
 
   const handleLogout = () => {
     setIsAuthenticated(false);
   };
 
-  const playTrack = (trackUri) => {
-    setCurrentTrackUri(trackUri);
+  const playTrack = (track, tracks) => {
+    setCurrentTrack(track);
+    setTrackList(tracks);
+  };
+
+  const playNextTrack = () => {
+    if (trackList.length > 0 && currentTrack) {
+      const currentIndex = trackList.findIndex((t) => t.id === currentTrack.id);
+      if (currentIndex < trackList.length - 1) {
+        setCurrentTrack(trackList[currentIndex + 1]);
+      }
+    }
+  };
+
+  const playPreviousTrack = () => {
+    if (trackList.length > 0 && currentTrack) {
+      const currentIndex = trackList.findIndex((t) => t.id === currentTrack.id);
+      if (currentIndex > 0) {
+        setCurrentTrack(trackList[currentIndex - 1]);
+      }
+    }
   };
 
   return (
-    <div className="app" style={{ margin: "0 10%" }}>
+    <div className="app" style={{ margin: "0 20px" }}>
       {!isAuthenticated ? (
         <Routes>
           <Route path="/" element={<InitialPage />} />
@@ -61,7 +81,7 @@ const App = () => {
               </Col>
             </Row>
           </Container>
-          <PlayerBar trackUri={currentTrackUri} />
+          <PlayerBar track={currentTrack} onNext={playNextTrack} onPrevious={playPreviousTrack} />
         </>
       )}
     </div>

@@ -1,3 +1,4 @@
+/* playerbar.css */
 .player-bar {
   position: fixed;
   bottom: 0;
@@ -13,15 +14,30 @@
   z-index: 1000;
 }
 
-.player-bar button {
+.track-details {
+  display: flex;
+  align-items: center;
+}
+
+.track-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.track-artist {
+  font-size: 14px;
+  color: #b3b3b3;
+}
+
+.player-controls button {
   background-color: transparent;
   color: #ffffff;
   border: none;
   margin: 0 10px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 24px;
 }
 
-.player-bar button:hover {
+.player-controls button:hover {
   color: #1db954;
 }

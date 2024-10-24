@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import PlayerBar from "./PlayerBar";
-import '../styles/mainContent.css';
 
-const AlbumPage = () => {
+const AlbumPage = ({ playTrack }) => {
   const { albumId } = useParams(); // L'ID dell'album viene preso dai parametri URL.
-  const [album, setAlbum] = useState(null); // Stato per i dettagli dell'album.
-  const [loading, setLoading] = useState(true); // Stato per il caricamento.
-  const [error, setError] = useState(null); // Stato per eventuali errori.
-  const [token, setToken] = useState(''); // Stato per il token di accesso Spotify.
-  const [currentTrackUri, setCurrentTrackUri] = useState(null); //stato per memorizzare la track attuale
+  const [album, setAlbum] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [token, setToken] = useState('');
 
-  // Effettua una richiesta per ottenere il token di accesso dal backend.
   useEffect(() => {
     const fetchToken = async () => {
       try {
@@ -27,69 +23,66 @@ const AlbumPage = () => {
     fetchToken();
   }, []);
 
-  // Effettua una richiesta per ottenere i dettagli dell'album quando il token è stato ottenuto.
   useEffect(() => {
     const fetchAlbum = async () => {
-      if (!token) return; // Assicurati che il token sia disponibile prima di procedere.
+      if (!token) return;
 
       try {
         // Richiedi i dettagli dell'album dall'API di Spotify.
         const response = await axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
           headers: {
-            Authorization: `Bearer ${token}`, // Includi il token di accesso nella richiesta.
+            Authorization: `Bearer ${token}`,
           },
         });
         setAlbum(response.data); // Salva i dati dell'album nello stato.
       } catch (error) {
         console.error('Error fetching album:', error);
-        setError('Error fetching album data.'); // Salva un eventuale errore.
+        setError('Error fetching album data.');
       } finally {
-        setLoading(false); // Imposta il caricamento su falso.
+        setLoading(false);
       }
     };
 
-    
-
     fetchAlbum();
-  }, [token, albumId]); // Questa richiesta viene rieseguita quando il token o l'album ID cambia.
+  }, [token, albumId]);
 
-  // Mostra un messaggio di caricamento finché i dati non sono disponibili.
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // Mostra un eventuale messaggio di errore.
   if (error) {
     return <div>{error}</div>;
   }
 
-  // Se non ci sono dati dell'album, mostra un messaggio.
   if (!album) {
     return <div>No album found</div>;
   }
 
-  const playTrack = (trackUri) => {
-    setCurrentTrackUri(trackUri);
+  const handleTrackClick = (track) => {
+    const trackData = {
+      id: track.id,
+      name: track.name,
+      artists: track.artists,
+      album: album,
+      uri: track.uri,
+    };
+    playTrack(trackData, album.tracks.items);
   };
 
-  // Ritorna il componente con i dettagli dell'album.
   return (
     <div className="album-details">
       <h2>{album.name}</h2>
       <p>Artist: {album.artists[0].name}</p>
       <img src={album.images[0].url} alt={`${album.name} cover`} style={{ width: '300px', height: '300px' }} />
       <ul>
-  {album.tracks.items.map((track) => (
-    <li key={track.id} onClick={() => playTrack(track.uri)}>
-      {track.name} - {Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}
-    </li>
-  ))}
-</ul>
-<PlayerBar trackUri={currentTrackUri} />
+        {album.tracks.items.map((track) => (
+          <li key={track.id} onClick={() => handleTrackClick(track)}>
+            {track.name} - {Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
-
-
 
 export default AlbumPage;
