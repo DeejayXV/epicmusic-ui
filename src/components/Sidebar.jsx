@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../axiosConfig'; // Importa l'istanza di Axios configurata
+import axiosInstance from '../axiosConfig';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
-import './Sidebar.css';
+import '../styles/sidebar.css';
 
 const Sidebar = () => {
   const [playlists, setPlaylists] = useState([]);
