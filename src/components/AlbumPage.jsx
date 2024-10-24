@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import PlayerBar from "./PlayerBar";
 
 const AlbumPage = () => {
   const { albumId } = useParams(); // L'ID dell'album viene preso dai parametri URL.
@@ -8,6 +9,7 @@ const AlbumPage = () => {
   const [loading, setLoading] = useState(true); // Stato per il caricamento.
   const [error, setError] = useState(null); // Stato per eventuali errori.
   const [token, setToken] = useState(''); // Stato per il token di accesso Spotify.
+  const [currentTrackUri, setCurrentTrackUri] = useState(null); //stato per memorizzare la track attuale
 
   // Effettua una richiesta per ottenere il token di accesso dal backend.
   useEffect(() => {
@@ -45,6 +47,8 @@ const AlbumPage = () => {
       }
     };
 
+    
+
     fetchAlbum();
   }, [token, albumId]); // Questa richiesta viene rieseguita quando il token o l'album ID cambia.
 
@@ -63,6 +67,10 @@ const AlbumPage = () => {
     return <div>No album found</div>;
   }
 
+  const playTrack = (trackUri) => {
+    setCurrentTrackUri(trackUri);
+  };
+
   // Ritorna il componente con i dettagli dell'album.
   return (
     <div className="album-details">
@@ -70,14 +78,17 @@ const AlbumPage = () => {
       <p>Artist: {album.artists[0].name}</p>
       <img src={album.images[0].url} alt={`${album.name} cover`} style={{ width: '300px', height: '300px' }} />
       <ul>
-        {album.tracks.items.map((track) => (
-          <li key={track.id}>
-            {track.name} - {Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}
-          </li>
-        ))}
-      </ul>
+  {album.tracks.items.map((track) => (
+    <li key={track.id} onClick={() => playTrack(track.uri)}>
+      {track.name} - {Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}
+    </li>
+  ))}
+</ul>
+<PlayerBar trackUri={currentTrackUri} />
     </div>
   );
 };
+
+
 
 export default AlbumPage;

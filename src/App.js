@@ -1,5 +1,3 @@
-// App.js
-
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
@@ -10,17 +8,22 @@ import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import InitialPage from "./components/InitialPage";
 import PlaylistDetail from "./components/PlaylistDetail";
-import AlbumPage from "./components/AlbumPage";
 import FeaturedAlbums from "./components/FeaturedAlbums";
-
+import AlbumPage from "./components/AlbumPage";
 import TopBar from "./components/TopBar";
+import PlayerBar from "./components/PlayerBar";
 import "./App.css";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentTrackUri, setCurrentTrackUri] = useState(null); // Stato per la traccia attualmente in riproduzione
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+  };
+
+  const playTrack = (trackUri) => {
+    setCurrentTrackUri(trackUri);
   };
 
   return (
@@ -44,15 +47,14 @@ const App = () => {
                   <Route path="/" element={<Feed />} />
                   <Route path="/playlists" element={<Playlists />} />
                   <Route path="/playlists/:playlistId" element={<PlaylistDetail />} />
-                  <Route path="/albums" element={<FeaturedAlbums />} /> {/* Nuova route per gli album in evidenza */}
-                  <Route path="/albums/:albumId" element={<AlbumPage />} /> {/* Route per i dettagli dell'album */}
+                  <Route path="/albums" element={<FeaturedAlbums playTrack={playTrack} />} />
+                  <Route path="/albums/:albumId" element={<AlbumPage playTrack={playTrack} />} />
                 </Routes>
               </Col>
-              <Col md={3} className="right-sidebar">
-                {/* Right Sidebar content can be added here, e.g., recommendations or new releases */}
-              </Col>
+              <Col md={3} className="right-sidebar"></Col>
             </Row>
           </Container>
+          <PlayerBar trackUri={currentTrackUri} />
         </>
       )}
     </div>
