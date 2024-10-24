@@ -7,6 +7,8 @@ import Playlists from "./pages/Playlists";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import InitialPage from "./components/InitialPage";
+import PlaylistDetail from "./components/PlaylistDetail";
+
 import TopBar from "./components/TopBar";
 import "./App.css";
 
@@ -37,6 +39,7 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Feed />} />
                   <Route path="/playlists" element={<Playlists />} />
+                  <Route path="/playlists/:playlistId" element={<PlaylistDetail />} /> {/* Nuova route per i dettagli della playlist */}
                 </Routes>
               </Col>
               <Col md={3} className="right-sidebar">

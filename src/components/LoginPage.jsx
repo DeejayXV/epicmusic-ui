@@ -26,6 +26,7 @@ function LoginPage({ setIsAuthenticated }) {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem('token', token);
+        console.log("Token salvato:", token);
         setIsAuthenticated(true);
         navigate('/');
       }

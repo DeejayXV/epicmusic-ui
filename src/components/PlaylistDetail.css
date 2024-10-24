@@ -1,0 +1,84 @@
+.playlist-detail {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-detail h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.playlist-detail p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.playlist-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.playlist-actions .btn {
+  font-size: 0.9rem;
+}
+
+.playlist-tracks {
+  margin-top: 20px;
+}
+
+.playlist-tracks h4 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.playlist-tracks ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.playlist-tracks li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playlist-tracks li:last-child {
+  border-bottom: none;
+}
+
+.track-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.track-title {
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.track-artist {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .playlist-detail {
+    padding: 15px;
+  }
+
+  .playlist-detail h2 {
+    font-size: 1.5rem;
+  }
+
+  .playlist-tracks h4 {
+    font-size: 1.3rem;
+  }
+}

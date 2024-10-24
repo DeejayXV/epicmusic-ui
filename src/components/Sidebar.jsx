@@ -1,5 +1,7 @@
+// src/components/Sidebar.jsx
+
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../axiosConfig'; // Importa l'istanza di Axios configurata
 import { Link } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
 import './Sidebar.css';
@@ -31,15 +33,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          throw new Error('Token not found');
-        }
-        const response = await axios.get('http://localhost:3001/api/playlists', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
+        const response = await axiosInstance.get('/playlists');
         setPlaylists(response.data);
       } catch (error) {
         console.error('Errore durante il recupero delle playlist', error);
@@ -51,20 +45,7 @@ const Sidebar = () => {
   // Funzione per creare una nuova playlist
   const createNewPlaylist = async () => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
-      }
-      const response = await axios.post(
-        'http://localhost:3001/api/playlists',
-        newPlaylistData,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axiosInstance.post('/playlists', newPlaylistData);
       setPlaylists([...playlists, response.data]);
       handleModalClose();
     } catch (error) {
