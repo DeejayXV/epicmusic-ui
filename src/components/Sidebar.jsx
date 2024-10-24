@@ -58,7 +58,7 @@ const Sidebar = () => {
       </nav>
       <h4 className='miniTitle mt-4'>My Collection</h4>
       <nav className="menu">
-      <Link to="/albums/1ATL5GLyefJaxhQzSPVrLX">Album</Link>
+      <Link to="/albums">Albums</Link>
         <Link to="/tracks">Tracks</Link>
         <Link to="/videos">Videos</Link>
         <Link to="/artists">Artists</Link>

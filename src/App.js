@@ -11,6 +11,7 @@ import LoginPage from "./components/LoginPage";
 import InitialPage from "./components/InitialPage";
 import PlaylistDetail from "./components/PlaylistDetail";
 import AlbumPage from "./components/AlbumPage";
+import FeaturedAlbums from "./components/FeaturedAlbums";
 
 import TopBar from "./components/TopBar";
 import "./App.css";
@@ -43,7 +44,8 @@ const App = () => {
                   <Route path="/" element={<Feed />} />
                   <Route path="/playlists" element={<Playlists />} />
                   <Route path="/playlists/:playlistId" element={<PlaylistDetail />} />
-                  <Route path="/albums/:albumId" element={<AlbumPage />} /> {/* Nuova route per gli album */}
+                  <Route path="/albums" element={<FeaturedAlbums />} /> {/* Nuova route per gli album in evidenza */}
+                  <Route path="/albums/:albumId" element={<AlbumPage />} /> {/* Route per i dettagli dell'album */}
                 </Routes>
               </Col>
               <Col md={3} className="right-sidebar">
