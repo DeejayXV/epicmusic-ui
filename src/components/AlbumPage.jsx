@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import PlayerBar from "./PlayerBar";
+import '../styles/mainContent.css';
 
 const AlbumPage = () => {
   const { albumId } = useParams(); // L'ID dell'album viene preso dai parametri URL.

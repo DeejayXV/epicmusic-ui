@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../styles/featuredAlbums.css';
 
 const FeaturedAlbums = () => {
   const [albums, setAlbums] = useState([]);
@@ -63,7 +64,7 @@ const FeaturedAlbums = () => {
         {albums.map((album) => (
           <div key={album.id} className="album-card">
             <Link to={`/albums/${album.id}`}>
-              <img src={album.images[0]?.url} alt={`${album.name} cover`} style={{ width: '150px', height: '150px' }} />
+              <img src={album.images[0]?.url} alt={`${album.name} cover`} style={{ width: '130px', height: '130px' }} />
               <p>{album.name}</p>
               <p>Artist: {album.artists[0]?.name}</p>
             </Link>

@@ -27,7 +27,7 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div className="app" style={{ margin: "0 10%" }}>
       {!isAuthenticated ? (
         <Routes>
           <Route path="/" element={<InitialPage />} />
@@ -39,10 +39,18 @@ const App = () => {
           <TopBar onLogout={handleLogout} />
           <Container fluid className="content-container">
             <Row>
-              <Col md={2} className="sidebar-container">
+              <Col
+                md={3}
+                className="sidebar-container"
+                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#1db954 #f8f8f8" }}
+              >
                 <Sidebar />
               </Col>
-              <Col md={7} className="main-content">
+              <Col
+                md={9}
+                className="main-content"
+                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#1db954 #f8f8f8" }}
+              >
                 <Routes>
                   <Route path="/" element={<Feed />} />
                   <Route path="/playlists" element={<Playlists />} />
@@ -51,7 +59,6 @@ const App = () => {
                   <Route path="/albums/:albumId" element={<AlbumPage playTrack={playTrack} />} />
                 </Routes>
               </Col>
-              <Col md={3} className="right-sidebar"></Col>
             </Row>
           </Container>
           <PlayerBar trackUri={currentTrackUri} />

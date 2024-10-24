@@ -16,3 +16,31 @@
   background-color: #1c1c1c;
   min-height: calc(100vh - 70px);
 }
+
+/* App.css */
+
+/* General Styles */
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #eaeaea;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+button {
+  font-family: "Arial", sans-serif;
+  padding: 10px;
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #14833b;
+}

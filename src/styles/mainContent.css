@@ -1,0 +1,32 @@
+.main-content {
+  /* margin-left: 200px; */
+  padding: 20px;
+  background-color: #8b8a8a;
+  min-height: calc(100vh - 60px);
+}
+
+.album-details {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.album-details h2 {
+  color: #1db954;
+}
+
+.album-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.album-details li {
+  margin: 10px 0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.album-details li:hover {
+  color: #1db954;
+}
