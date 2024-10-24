@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
@@ -8,6 +10,7 @@ import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import InitialPage from "./components/InitialPage";
 import PlaylistDetail from "./components/PlaylistDetail";
+import AlbumPage from "./components/AlbumPage";
 
 import TopBar from "./components/TopBar";
 import "./App.css";
@@ -39,7 +42,8 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Feed />} />
                   <Route path="/playlists" element={<Playlists />} />
-                  <Route path="/playlists/:playlistId" element={<PlaylistDetail />} /> {/* Nuova route per i dettagli della playlist */}
+                  <Route path="/playlists/:playlistId" element={<PlaylistDetail />} />
+                  <Route path="/albums/:albumId" element={<AlbumPage />} /> {/* Nuova route per gli album */}
                 </Routes>
               </Col>
               <Col md={3} className="right-sidebar">

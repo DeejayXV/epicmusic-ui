@@ -1,5 +1,3 @@
-// src/components/Sidebar.jsx
-
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosConfig'; // Importa l'istanza di Axios configurata
 import { Link } from 'react-router-dom';
@@ -60,7 +58,7 @@ const Sidebar = () => {
       </nav>
       <h4 className='miniTitle mt-4'>My Collection</h4>
       <nav className="menu">
-        <Link to="/albums">Albums</Link>
+      <Link to="/albums/1ATL5GLyefJaxhQzSPVrLX">Album</Link>
         <Link to="/tracks">Tracks</Link>
         <Link to="/videos">Videos</Link>
         <Link to="/artists">Artists</Link>
