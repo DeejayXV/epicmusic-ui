@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './InitialPage.css';
+import '../styles/initialPage.css';
 
 const InitialPage = () => {
   return (

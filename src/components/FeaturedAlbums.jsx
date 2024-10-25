@@ -29,7 +29,7 @@ const FeaturedAlbums = () => {
       if (!token) return;
 
       try {
-        // Otteniamo alcuni album popolari tramite l'API di Spotify
+        
         const response = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,12 +47,10 @@ const FeaturedAlbums = () => {
     fetchAlbums();
   }, [token]);
 
-  // Mostra un messaggio di caricamento finché i dati non sono disponibili.
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // Mostra un eventuale messaggio di errore.
   if (error) {
     return <div>{error}</div>;
   }

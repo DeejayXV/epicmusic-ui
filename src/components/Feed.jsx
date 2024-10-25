@@ -58,7 +58,7 @@ const Feed = ({ setCurrentTrack }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setSuggestedTracks(suggestedTracksResponse.data.tracks.slice(0, 10)); // Limita a 10 tracce suggerite
+        setSuggestedTracks(suggestedTracksResponse.data.tracks.slice(0, 10)); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -75,7 +75,7 @@ const Feed = ({ setCurrentTrack }) => {
     <Container fluid className="feed-container">
       <Row>
         <Col xs={3} className="sidebar-container">
-          {/* Sidebar del menu - Aggiungi qui il contenuto della sidebar */}
+          
         </Col>
         <Col xs={9} className="feed-main">
           <h2 className="feed-title">Suggested Albums</h2>

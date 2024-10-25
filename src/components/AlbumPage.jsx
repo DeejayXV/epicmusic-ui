@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const AlbumPage = ({ playTrack }) => {
-  const { albumId } = useParams(); // L'ID dell'album viene preso dai parametri URL.
+  const { albumId } = useParams(); 
   const [album, setAlbum] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,9 +12,9 @@ const AlbumPage = ({ playTrack }) => {
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        // Richiede il token dal backend Spring Boot in esecuzione su localhost:3001
+        
         const response = await axios.get('http://localhost:3001/api/spotify/token');
-        setToken(response.data.access_token); // Salva il token di accesso.
+        setToken(response.data.access_token); 
       } catch (error) {
         console.error('Error getting token:', error);
       }
