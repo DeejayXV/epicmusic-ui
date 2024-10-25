@@ -16,7 +16,7 @@ import TrendingTracks from "./components/TrendingTracks";
 import TrendingPodcasts from "./components/TrendingPodcasts";
 import TopBar from "./components/TopBar";
 import PlayerBar from "./components/PlayerBar";
-import SearchResults from "./components/SearchResults"; // Nuovo componente per i risultati di ricerca
+import SearchResults from "./components/SearchResults";
 import "./App.css";
 import axios from "axios";
 
@@ -29,9 +29,9 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Rimuovi il token dal localStorage
+    localStorage.removeItem("token");
     setIsAuthenticated(false);
-    navigate("/"); // Reindirizza alla pagina iniziale
+    navigate("/");
   };
 
   const playTrack = (track, tracks) => {
@@ -59,7 +59,6 @@ const App = () => {
 
   const handleSearch = async (searchTerm) => {
     if (!token) {
-      // Richiedi il token dal backend se non è già disponibile
       try {
         const response = await axios.get("http://localhost:3001/api/spotify/token");
         setToken(response.data.access_token);
@@ -70,10 +69,8 @@ const App = () => {
     }
 
     try {
-      // Codifica il termine di ricerca per evitare caratteri non supportati
       const encodedSearchTerm = encodeURIComponent(searchTerm);
 
-      // Esegui la richiesta di ricerca con il termine codificato
       const response = await axios.get(`https://api.spotify.com/v1/search?q=${encodedSearchTerm}&type=album,artist,track`, {
         headers: {
           Authorization: `Bearer ${token}`,
