@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import '../styles/albumPage.css';
 
 const AlbumPage = ({ playTrack }) => {
   const { albumId } = useParams(); 
@@ -71,13 +72,18 @@ const AlbumPage = ({ playTrack }) => {
 
   return (
     <div className="album-details">
-      <h2>{album.name}</h2>
-      <p>Artist: {album.artists[0].name}</p>
-      <img src={album.images[0].url} alt={`${album.name} cover`} style={{ width: '300px', height: '300px' }} />
-      <ul>
+      <div className="album-header">
+        <img src={album.images[0].url} alt={`${album.name} cover`} className="album-cover" />
+        <div className="album-info">
+          <h2>{album.name}</h2>
+          <p>Artist: {album.artists[0].name}</p>
+        </div>
+      </div>
+      <ul className="track-list">
         {album.tracks.items.map((track) => (
-          <li key={track.id} onClick={() => handleTrackClick(track)}>
-            {track.name} - {Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}
+          <li key={track.id} className="track-item" onClick={() => handleTrackClick(track)}>
+            <span className="track-name">{track.name}</span>
+            <span className="track-duration">{Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}</span>
           </li>
         ))}
       </ul>
