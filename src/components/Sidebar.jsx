@@ -52,20 +52,20 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ overflowY: 'auto', maxHeight: '100vh', scrollbarWidth: 'thin', scrollbarColor: '#1db954 #f8f8f8' }}>
       <nav className="menu">
         <Link to="/">Home</Link>
       </nav>
       <h4 className='miniTitle mt-4'>My Collection</h4>
       <nav className="menu">
-      <Link to="/albums">Albums</Link>
+        <Link to="/albums">Albums</Link>
         <Link to="/tracks">Tracks</Link>
         <Link to="/artists">Artists</Link>
         <Link to="/podcasts">Podcasts</Link>
       </nav>
       <div className="user-playlists">
         <h4 className='miniTitle mt-4'>Your Playlists</h4>
-        <button className="create-playlist" onClick={handleModalShow}>
+        <button className="create-playlist" style={{ borderRadius: '5px', backgroundColor: '#d3d3d3', border: 'none', width: '130px', height: '50px', cursor: 'pointer', marginBottom:'10px' }} onClick={handleModalShow}>
           New Playlist +
         </button>
         <ul>
