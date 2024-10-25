@@ -72,6 +72,7 @@ const AlbumPage = ({ playTrack }) => {
 
   return (
     <div className="album-details">
+      <button onClick={() => window.history.back()} className="back-button" style={{ borderRadius: '50%', backgroundColor: '#d3d3d3', border: 'none', width: '50px', height: '50px', cursor: 'pointer', marginBottom:'10px' }}> Back</button>
       <div className="album-header">
         <img src={album.images[0].url} alt={`${album.name} cover`} className="album-cover" />
         <div className="album-info">
