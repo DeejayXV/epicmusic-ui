@@ -1,70 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import '../styles/trendingPodcasts.css';
+import dailyPodcastImage from '../assets/images/daily-podcast.jpg';
+import scienceVsImage from '../assets/images/science-vs-podcast.jpg';
+import crimeJunkieImage from '../assets/images/crime-junkie-podcast.jpg';
+import stuffYouShouldKnowImage from '../assets/images/stuff-you-should-know.jpg';
+import tedTalksImage from '../assets/images/ted-talks.jpg';
 
 const TrendingPodcasts = ({ playTrack }) => {
-  const [podcasts, setPodcasts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        // Richiedi il token dal backend Spring Boot
-        const response = await axios.get('http://localhost:3001/api/spotify/token');
-        setToken(response.data.access_token);
-      } catch (error) {
-        console.error('Error getting token:', error);
-        setError('Error fetching token.');
-      }
-    };
-
-    fetchToken();
-  }, []);
-
-  useEffect(() => {
-    const fetchTrendingPodcasts = async () => {
-      if (!token) return;
-
-      try {
-        // Richiedi i podcast in tendenza dall'API di Spotify
-        const response = await axios.get('https://api.spotify.com/v1/browse/categories/podcasts/playlists', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        // Estrai i podcast dai risultati
-        const podcastsData = [];
-        for (let playlist of response.data.playlists.items.slice(0, 3)) {
-          const playlistResponse = await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          podcastsData.push(...playlistResponse.data.tracks.items.map(item => item.track));
-        }
-
-        setPodcasts(podcastsData.slice(0, 20)); // Limita a 20 podcast
-      } catch (error) {
-        console.error('Error fetching podcasts:', error);
-        setError('Error fetching podcast data.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTrendingPodcasts();
-  }, [token]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // Dati statici dei podcast
+  const podcasts = [
+    {
+      id: '1',
+      name: 'The Daily',
+      publisher: 'The New York Times',
+      description: 'A daily news podcast with the most important stories of the day.',
+      image: dailyPodcastImage 
+    },
+    {
+      id: '2',
+      name: 'Science Vs',
+      publisher: 'Gimlet',
+      description: 'A show that pits facts against popular myths and misconceptions.',
+      image: scienceVsImage
+    },
+    {
+      id: '3',
+      name: 'Crime Junkie',
+      publisher: 'Audiochuck',
+      description: 'A podcast covering crime stories in a gripping way.',
+      image: crimeJunkieImage
+    },
+    {
+      id: '4',
+      name: 'Stuff You Should Know',
+      publisher: 'iHeartRadio',
+      description: 'Learn about a wide variety of topics in a fun and informative way.',
+      image: stuffYouShouldKnowImage
+    },
+    {
+      id: '5',
+      name: 'TED Talks Daily',
+      publisher: 'TED',
+      description: 'Bringing you the latest talks from TED events.',
+      image: tedTalksImage
+    }
+  ];
+  
 
   return (
     <div className="trending-podcasts">
@@ -72,10 +53,11 @@ const TrendingPodcasts = ({ playTrack }) => {
       <div className="podcasts-list">
         {podcasts.map((podcast) => (
           <div key={podcast.id} className="podcast-card" onClick={() => playTrack(podcast, podcasts)}>
-            <img src={podcast.album.images[0]?.url} alt={podcast.name} className="podcast-image" />
+            <img src={podcast.image} alt={podcast.name} className="podcast-image" />
             <div className="podcast-info">
               <p className="podcast-name">{podcast.name}</p>
-              <p className="podcast-artist">{podcast.artists.map(artist => artist.name).join(', ')}</p>
+              <p className="podcast-publisher">{podcast.publisher}</p>
+              <p className="podcast-description">{podcast.description}</p>
             </div>
           </div>
         ))}
