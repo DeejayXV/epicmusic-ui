@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Navbar, Form, FormControl, Button, Dropdown, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "./TopBar.css";
+import "../styles/topbar.css";
 
 const TopBar = ({ onLogout }) => {
   return (
@@ -16,17 +16,17 @@ const TopBar = ({ onLogout }) => {
           </Col>
 
           {/* Colonna centrale - Searchbar */}
-          <Col xs={7}>
-            <Form className="d-flex">
-              <FormControl type="search" placeholder="Search for songs, artists or albums" className="me-2" />
-              <Button variant="outline-success">Cerca</Button>
+          <Col xs={7} className="d-flex justify-content-center">
+            <Form className="d-flex w-100">
+              <FormControl type="search" placeholder="Search for songs, artists or albums" className="me-2 search-input" />
+              <Button variant="outline-success">Search</Button>
             </Form>
           </Col>
 
           {/* Colonna destra - Profilo utente */}
           <Col xs={3} className="d-flex justify-content-end">
             <Dropdown align="end">
-              <Dropdown.Toggle variant="secondary" id="dropdown-avatar">
+              <Dropdown.Toggle variant="secondary" id="dropdown-avatar" className="avatar-dropdown">
                 <img
                   src="https://source.unsplash.com/random/50x50/?profile"
                   alt="Avatar"
@@ -36,8 +36,8 @@ const TopBar = ({ onLogout }) => {
 
               <Dropdown.Menu>
                 <Dropdown.Item as={Link} to="/account">Account</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/profile">Profilo</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/settings">Impostazioni</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
