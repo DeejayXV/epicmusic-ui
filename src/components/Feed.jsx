@@ -72,7 +72,7 @@ const Feed = ({ setCurrentTrack }) => {
   };
 
   return (
-    <Container fluid className="feed-container">
+    <Container fluid className="feed-container" style={{ marginRight: '10%' }}>
       <Row>
         <Col xs={3} className="sidebar-container">
           

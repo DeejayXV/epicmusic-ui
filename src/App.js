@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
@@ -26,9 +26,12 @@ const App = () => {
   const [trackList, setTrackList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [token, setToken] = useState("");
+  const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem("token"); // Rimuovi il token dal localStorage
     setIsAuthenticated(false);
+    navigate("/"); // Reindirizza alla pagina iniziale
   };
 
   const playTrack = (track, tracks) => {
@@ -97,16 +100,9 @@ const App = () => {
           <Container fluid className="content-container">
             <Row>
               <Col
-                md={2}
-                className="sidebar-container"
-                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#1db954 #f8f8f8" }}
-              >
-                <Sidebar />
-              </Col>
-              <Col
                 md={9}
                 className="main-content"
-                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#1db954 #f8f8f8" }}
+                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
               >
                 <Routes>
                   <Route path="/" element={<Feed setCurrentTrack={playTrack} />} />
@@ -120,6 +116,13 @@ const App = () => {
                   <Route path="/podcasts" element={<TrendingPodcasts playTrack={playTrack} />} />
                   <Route path="/search" element={<SearchResults results={searchResults} playTrack={playTrack} />} />
                 </Routes>
+              </Col>
+              <Col
+                md={2}
+                className="sidebar-container"
+                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a", width: "0px" }}
+              >
+                <Sidebar />
               </Col>
             </Row>
           </Container>

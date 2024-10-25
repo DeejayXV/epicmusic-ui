@@ -3,19 +3,19 @@
 }
 
 .sidebar-container {
-  background-color: #f8f9fa;
-  min-height: calc(100vh - 70px);
+  background-color: #8b8a8a;
+  width: 0px;
 }
 
 .main-content {
   min-height: calc(100vh - 70px);
 }
 
-.right-sidebar {
+/* .right-sidebar {
   padding: 20px;
   background-color: #1c1c1c;
   min-height: calc(100vh - 70px);
-}
+} */
 
 body {
   margin: 0;
@@ -40,4 +40,9 @@ button {
 
 button:hover {
   background-color: #14833b;
+}
+
+.main-content {
+  margin-left: 5%;
+  background-color: #8b8a8a;
 }
