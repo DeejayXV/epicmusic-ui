@@ -24,14 +24,14 @@ const TopBar = ({ onLogout, onSearch }) => {
       <Container fluid>
         <Row className="align-items-center" style={{ width: "100%" }}>
           {/* Colonna sinistra - Logo */}
-          <Col xs={2} className="d-flex align-items-center">
-            <Navbar.Brand as={Link} to="/">
-              EpicMusic
-            </Navbar.Brand>
-          </Col>
+          <Col xs={2} className="d-flex align-items-center" style={{ paddingLeft: '10%' }}>
+  <Navbar.Brand as={Link} to="/">
+    EpicMusic
+  </Navbar.Brand>
+</Col>
 
           {/* Colonna centrale - Searchbar */}
-          <Col xs={7} className="d-flex justify-content-center">
+          <Col xs={7} className="d-flex justify-content-center" style={{ paddingLeft: '12%' }}>
             <Form className="d-flex w-100" onSubmit={handleSearchSubmit}>
               <FormControl
                 type="search"
@@ -47,25 +47,25 @@ const TopBar = ({ onLogout, onSearch }) => {
           </Col>
 
           {/* Colonna destra - Profilo utente */}
-          <Col xs={3} className="d-flex justify-content-end">
-            <Dropdown align="end">
-              <Dropdown.Toggle variant="secondary" id="dropdown-avatar" className="avatar-dropdown">
-                <img
-                  src="https://source.unsplash.com/random/50x50/?profile"
-                  alt="Avatar"
-                  className="rounded-circle avatar"
-                />
-              </Dropdown.Toggle>
+          <Col xs={3} className="d-flex justify-content-end" style={{ paddingRight: '15%' }}>
+  <Dropdown align="end">
+    <Dropdown.Toggle variant="secondary" id="dropdown-avatar" className="avatar-dropdown">
+      <img
+        src="https://source.unsplash.com/random/50x50/?profile"
+        alt="Profile"
+        className="rounded-circle avatar"
+      />
+    </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/account">Account</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Col>
+    <Dropdown.Menu>
+      <Dropdown.Item as={Link} to="/account">Account</Dropdown.Item>
+      <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
+      <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
+      <Dropdown.Divider />
+      <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+</Col>
         </Row>
       </Container>
     </Navbar>
