@@ -120,7 +120,7 @@ const App = () => {
               <Col
                 md={2}
                 className="sidebar-container"
-                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a", width: "0px" }}
+                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
               >
                 <Sidebar />
               </Col>

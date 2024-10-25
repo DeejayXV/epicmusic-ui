@@ -7,7 +7,7 @@ import stuffYouShouldKnowImage from '../assets/images/stuff-you-should-know.jpg'
 import tedTalksImage from '../assets/images/ted-talks.jpg';
 
 const TrendingPodcasts = ({ playTrack }) => {
-  // Dati statici dei podcast
+  // Dati statici dei podcast, impossibile rendere dinamico con Spotify API
   const podcasts = [
     {
       id: '1',

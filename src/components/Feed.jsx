@@ -36,7 +36,7 @@ const Feed = ({ setCurrentTrack }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setSuggestedAlbums(albumsResponse.data.albums.items.slice(0, 3)); // Limita a 3 album suggeriti
+        setSuggestedAlbums(albumsResponse.data.albums.items.slice(0, 3));
 
         // Richiedi le tracce del giorno
         const tracksResponse = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
@@ -50,7 +50,7 @@ const Feed = ({ setCurrentTrack }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setTracksOfTheDay(playlistTracksResponse.data.tracks.items.slice(0, 3).map(item => item.track)); // Limita a 3 tracce del giorno
+        setTracksOfTheDay(playlistTracksResponse.data.tracks.items.slice(0, 3).map(item => item.track));
 
         // Richiedi le tracce suggerite
         const suggestedTracksResponse = await axios.get('https://api.spotify.com/v1/recommendations?seed_genres=pop', {

@@ -12,10 +12,9 @@ const Sidebar = () => {
     description: '',
   });
 
-  // Funzione per aprire il modal
+  // Funzione per il modale
   const handleModalShow = () => setShowModal(true);
 
-  // Funzione per chiudere il modal
   const handleModalClose = () => {
     setShowModal(false);
     setNewPlaylistData({ name: '', description: '' });

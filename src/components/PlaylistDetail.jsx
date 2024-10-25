@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import './PlaylistDetail.css';
+import '../styles/PlaylistDetail.css';
 
 const PlaylistDetail = () => {
   const { playlistId } = useParams();
@@ -36,7 +36,7 @@ const PlaylistDetail = () => {
 
   // Funzione per modificare la playlist
   const handleEdit = () => {
-    // Puoi implementare una logica per modificare il nome e la descrizione della playlist
+    
     alert('Funzionalità di modifica in sviluppo...');
   };
 
