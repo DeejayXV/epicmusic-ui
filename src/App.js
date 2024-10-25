@@ -55,7 +55,7 @@ const App = () => {
       {!isAuthenticated ? (
         <Routes>
           <Route path="/" element={<InitialPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register" element={<RegisterPage setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
         </Routes>
       ) : (
@@ -76,7 +76,7 @@ const App = () => {
                 style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#1db954 #f8f8f8" }}
               >
                 <Routes>
-                  <Route path="/" element={<Feed />} />
+                  <Route path="/" element={<Feed setCurrentTrack={playTrack} />} />
                   <Route path="/playlists" element={<Playlists />} />
                   <Route path="/playlists/:playlistId" element={<PlaylistDetail />} />
                   <Route path="/albums" element={<FeaturedAlbums playTrack={playTrack} />} />

@@ -1,81 +1,125 @@
-import React from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import "./Feed.css";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import "../styles/feed.css";
 
-const Feed = () => {
+const Feed = ({ setCurrentTrack }) => {
+  const [suggestedAlbums, setSuggestedAlbums] = useState([]);
+  const [tracksOfTheDay, setTracksOfTheDay] = useState([]);
+  const [suggestedTracks, setSuggestedTracks] = useState([]);
+  const [token, setToken] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        // Richiedi il token dal backend Spring Boot
+        const response = await axios.get('http://localhost:3001/api/spotify/token');
+        setToken(response.data.access_token);
+      } catch (error) {
+        console.error('Error getting token:', error);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!token) return;
+
+      try {
+        // Richiedi album suggeriti
+        const albumsResponse = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSuggestedAlbums(albumsResponse.data.albums.items.slice(0, 3)); // Limita a 3 album suggeriti
+
+        // Richiedi le tracce del giorno
+        const tracksResponse = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const playlistId = tracksResponse.data.playlists.items[0].id;
+        const playlistTracksResponse = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setTracksOfTheDay(playlistTracksResponse.data.tracks.items.slice(0, 3).map(item => item.track)); // Limita a 3 tracce del giorno
+
+        // Richiedi le tracce suggerite
+        const suggestedTracksResponse = await axios.get('https://api.spotify.com/v1/recommendations?seed_genres=pop', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSuggestedTracks(suggestedTracksResponse.data.tracks.slice(0, 10)); // Limita a 10 tracce suggerite
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  const handlePlayTrack = (track) => {
+    setCurrentTrack(track);
+  };
+
   return (
     <Container fluid className="feed-container">
       <Row>
-        
-        <Col xs={8} className="feed-main">
-          <h2 className="feed-title">Playlist of the day</h2>
-          <Card className="feed-card">
-            <Card.Img
-              variant="top"
-              src="https://source.unsplash.com/featured/?music"
-              alt="Playlist of the day"
-            />
-            <Card.Body>
-              <Card.Title>Between Death and Dreams</Card.Title>
-              <Card.Text>Discover our exclusive playlist of the day!</Card.Text>
-              <Button variant="primary">Listen Now</Button>
-            </Card.Body>
-          </Card>
-
-        
-          <div className="feed-playlists mt-3">
-            <h3>My Playlist</h3>
-            <Row>
-              <Col xs={6} md={4}>
-                <Card className="feed-playlist-card">
-                  <Card.Img
-                    variant="top"
-                    src="https://source.unsplash.com/featured/?guitar"
-                    alt="Playlist 1"
-                  />
-                  <Card.Body>
-                    <Card.Title>Workout Gym</Card.Title>
-                    <Button variant="outline-secondary">Play</Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col xs={6} md={4}>
-                <Card className="feed-playlist-card">
-                  <Card.Img
-                    variant="top"
-                    src="https://source.unsplash.com/featured/?concert"
-                    alt="Playlist 2"
-                  />
-                  <Card.Body>
-                    <Card.Title>Funny Stuff</Card.Title>
-                    <Button variant="outline-secondary">Play</Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-              {/* Aggiungi altre colonne per le playlist se necessario */}
-            </Row>
-          </div>
+        <Col xs={3} className="sidebar-container">
+          {/* Sidebar del menu - Aggiungi qui il contenuto della sidebar */}
         </Col>
+        <Col xs={9} className="feed-main">
+          <h2 className="feed-title">Suggested Albums</h2>
+          <Row>
+            {suggestedAlbums.map((album) => (
+              <Col key={album.id} xs={6} md={4} className="mb-4">
+                <Card className="feed-card small-card">
+                  <Card.Img variant="top" src={album.images[0]?.url} alt={album.name} />
+                  <Card.Body>
+                    <Card.Title>{album.name}</Card.Title>
+                    <Card.Text>By {album.artists.map(artist => artist.name).join(', ')}</Card.Text>
+                    <Button variant="primary" onClick={() => navigate(`/albums/${album.id}`)}>View Album</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
 
-        {/* Sidebar destra o altre informazioni - Col 3 */}
-        <Col xs={4} className="right-sidebar">
-          <div className="statistics-section">
-            <h3>Statistics</h3>
-            <p>Favorite songs: 247</p>
-            <p>Listened recently: 363</p>
-            <p>Total Streams: 29</p>
-          </div>
-          <div className="upgrade-section">
-            <Card className="upgrade-card">
-              <Card.Body>
-                <Card.Title>Check the power of EpicMusic</Card.Title>
-                <Card.Text>
-                  Enjoy uninterrupted music streaming with our premium subscription.
-                </Card.Text>
-                <Button variant="success">Upgrade</Button>
-              </Card.Body>
-            </Card>
-          </div>
+          <h2 className="feed-title mt-4">Tracks of the Day</h2>
+          <Row>
+            {tracksOfTheDay.map((track) => (
+              <Col key={track.id} xs={6} md={4} className="mb-4">
+                <Card className="feed-card small-card">
+                  <Card.Img variant="top" src={track.album.images[0]?.url} alt={track.name} />
+                  <Card.Body>
+                    <Card.Title>{track.name}</Card.Title>
+                    <Card.Text>By {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
+                    <Button variant="outline-secondary" onClick={() => handlePlayTrack(track)}>Play</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+
+          <h2 className="feed-title mt-4">Suggested Tracks</h2>
+          <ListGroup className="suggested-tracks-list">
+            {suggestedTracks.map((track, index) => (
+              <ListGroup.Item key={index} className="suggested-track-item" action onClick={() => handlePlayTrack(track)}>
+                <div>
+                  <strong>{track.name}</strong> - {track.artists.map(artist => artist.name).join(', ')}
+                </div>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </Col>
       </Row>
     </Container>
