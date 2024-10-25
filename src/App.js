@@ -84,7 +84,7 @@ const App = () => {
   };
 
   return (
-    <div className="app" style={{ margin: "0 20px" }}>
+    <div className="app" style={{ margin: "0 10%" }}>
       {!isAuthenticated ? (
         <Routes>
           <Route path="/" element={<InitialPage />} />
@@ -97,7 +97,7 @@ const App = () => {
           <Container fluid className="content-container">
             <Row>
               <Col
-                md={3}
+                md={2}
                 className="sidebar-container"
                 style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#1db954 #f8f8f8" }}
               >

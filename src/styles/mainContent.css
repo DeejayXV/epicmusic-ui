@@ -1,7 +1,7 @@
 .main-content {
-  /* margin-left: 200px; */
+  margin-left: 200px;
   padding: 20px;
-  background-color: #8b8a8a;
+  background-color: #898686;
   min-height: calc(100vh - 60px);
 }
 
