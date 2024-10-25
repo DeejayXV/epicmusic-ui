@@ -1,0 +1,44 @@
+.trending-podcasts {
+  padding: 20px;
+}
+
+.podcasts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.podcast-card {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.podcast-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.podcast-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.podcast-info {
+  margin-top: 10px;
+}
+
+.podcast-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.podcast-artist {
+  color: #666;
+  font-size: 0.9em;
+}
