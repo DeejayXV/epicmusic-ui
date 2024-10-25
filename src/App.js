@@ -16,12 +16,16 @@ import TrendingTracks from "./components/TrendingTracks";
 import TrendingPodcasts from "./components/TrendingPodcasts";
 import TopBar from "./components/TopBar";
 import PlayerBar from "./components/PlayerBar";
+import SearchResults from "./components/SearchResults"; // Nuovo componente per i risultati di ricerca
 import "./App.css";
+import axios from "axios";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState(null); // Stato per la traccia attualmente in riproduzione
-  const [trackList, setTrackList] = useState([]); // Stato per la lista delle tracce
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [trackList, setTrackList] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [token, setToken] = useState("");
 
   const handleLogout = () => {
     setIsAuthenticated(false);
@@ -50,17 +54,46 @@ const App = () => {
     }
   };
 
+  const handleSearch = async (searchTerm) => {
+    if (!token) {
+      // Richiedi il token dal backend se non è già disponibile
+      try {
+        const response = await axios.get("http://localhost:3001/api/spotify/token");
+        setToken(response.data.access_token);
+      } catch (error) {
+        console.error("Error getting token:", error);
+        return;
+      }
+    }
+
+    try {
+      // Codifica il termine di ricerca per evitare caratteri non supportati
+      const encodedSearchTerm = encodeURIComponent(searchTerm);
+
+      // Esegui la richiesta di ricerca con il termine codificato
+      const response = await axios.get(`https://api.spotify.com/v1/search?q=${encodedSearchTerm}&type=album,artist,track`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error("Error fetching search results:", error.response ? error.response.data : error.message);
+    }
+  };
+
   return (
     <div className="app" style={{ margin: "0 20px" }}>
       {!isAuthenticated ? (
         <Routes>
           <Route path="/" element={<InitialPage />} />
-          <Route path="/register" element={<RegisterPage setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
         </Routes>
       ) : (
         <>
-          <TopBar onLogout={handleLogout} />
+          <TopBar onLogout={handleLogout} onSearch={handleSearch} />
           <Container fluid className="content-container">
             <Row>
               <Col
@@ -85,6 +118,7 @@ const App = () => {
                   <Route path="/artists/:artistId" element={<ArtistPage playTrack={playTrack} />} />
                   <Route path="/tracks" element={<TrendingTracks playTrack={playTrack} />} />
                   <Route path="/podcasts" element={<TrendingPodcasts playTrack={playTrack} />} />
+                  <Route path="/search" element={<SearchResults results={searchResults} playTrack={playTrack} />} />
                 </Routes>
               </Col>
             </Row>

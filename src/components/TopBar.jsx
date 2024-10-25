@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Navbar, Form, FormControl, Button, Dropdown, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/topbar.css";
 
-const TopBar = ({ onLogout }) => {
+const TopBar = ({ onLogout, onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      onSearch(searchTerm);
+      navigate("/search"); // Naviga alla pagina dei risultati della ricerca
+    }
+  };
+
   return (
     <Navbar bg="dark" variant="dark" fixed="top" className="top-bar">
       <Container fluid>
@@ -17,9 +32,17 @@ const TopBar = ({ onLogout }) => {
 
           {/* Colonna centrale - Searchbar */}
           <Col xs={7} className="d-flex justify-content-center">
-            <Form className="d-flex w-100">
-              <FormControl type="search" placeholder="Search for songs, artists or albums" className="me-2 search-input" />
-              <Button variant="outline-success">Search</Button>
+            <Form className="d-flex w-100" onSubmit={handleSearchSubmit}>
+              <FormControl
+                type="search"
+                placeholder="Search for songs, artists or albums"
+                className="me-2 search-input"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <Button variant="outline-success" type="submit">
+                Search
+              </Button>
             </Form>
           </Col>
 
