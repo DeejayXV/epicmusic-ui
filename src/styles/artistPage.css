@@ -1,0 +1,28 @@
+.artist-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.artist-page img {
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.artist-page h3 {
+  margin-top: 20px;
+}
+
+.artist-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.artist-page li {
+  margin: 10px 0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.artist-page li:hover {
+  color: #1db954;
+}

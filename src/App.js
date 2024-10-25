@@ -10,6 +10,8 @@ import InitialPage from "./components/InitialPage";
 import PlaylistDetail from "./components/PlaylistDetail";
 import FeaturedAlbums from "./components/FeaturedAlbums";
 import AlbumPage from "./components/AlbumPage";
+import FeaturedArtists from "./components/FeaturedArtists";
+import ArtistPage from "./components/ArtistPage";
 import TopBar from "./components/TopBar";
 import PlayerBar from "./components/PlayerBar";
 import "./App.css";
@@ -77,6 +79,8 @@ const App = () => {
                   <Route path="/playlists/:playlistId" element={<PlaylistDetail />} />
                   <Route path="/albums" element={<FeaturedAlbums playTrack={playTrack} />} />
                   <Route path="/albums/:albumId" element={<AlbumPage playTrack={playTrack} />} />
+                  <Route path="/artists" element={<FeaturedArtists />} />
+                  <Route path="/artists/:artistId" element={<ArtistPage playTrack={playTrack} />} />
                 </Routes>
               </Col>
             </Row>

@@ -1,0 +1,34 @@
+.featured-artists {
+  padding: 20px;
+}
+
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.artist-card {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f8f8f8;
+}
+
+.artist-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.artist-card p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.artist-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
