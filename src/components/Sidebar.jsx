@@ -60,7 +60,6 @@ const Sidebar = () => {
       <nav className="menu">
       <Link to="/albums">Albums</Link>
         <Link to="/tracks">Tracks</Link>
-        <Link to="/videos">Videos</Link>
         <Link to="/artists">Artists</Link>
         <Link to="/podcasts">Podcasts</Link>
       </nav>
