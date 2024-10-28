@@ -99,7 +99,7 @@ const App = () => {
               <Col
                 md={9}
                 className="main-content"
-                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
+                style={{ overflowY: "auto", maxHeight: "89vh", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
               >
                 <Routes>
                   <Route path="/" element={<Feed setCurrentTrack={playTrack} />} />
@@ -115,9 +115,9 @@ const App = () => {
                 </Routes>
               </Col>
               <Col
-                md={2}
+                md={1}
                 className="sidebar-container"
-                style={{ overflowY: "auto", maxHeight: "calc(100vh - 60px)", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
+                style={{ overflowY: "auto", maxHeight: "89vh", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
               >
                 <Sidebar />
               </Col>

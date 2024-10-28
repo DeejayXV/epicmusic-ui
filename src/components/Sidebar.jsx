@@ -51,7 +51,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar" style={{ overflowY: 'auto', maxHeight: '100vh', scrollbarWidth: 'thin', scrollbarColor: '#1db954 #f8f8f8' }}>
+    <div className="sidebar" style={{ overflowY: 'auto', maxHeight: '100vh', scrollbarWidth: 'thin', scrollbarColor: '#A8A8A8' }}>
       <nav className="menu">
         <Link to="/">Home</Link>
       </nav>
