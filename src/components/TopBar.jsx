@@ -31,7 +31,7 @@ const TopBar = ({ onLogout, onSearch }) => {
 </Col>
 
           {/* Colonna centrale - Searchbar */}
-          <Col xs={7} className="d-flex justify-content-center" style={{ paddingLeft: '12%' }}>
+          <Col xs={7} className="d-flex justify-content-center" style={{ paddingLeft: '15%' }}>
             <Form className="d-flex w-100" onSubmit={handleSearchSubmit}>
               <FormControl
                 type="search"
@@ -47,7 +47,7 @@ const TopBar = ({ onLogout, onSearch }) => {
           </Col>
 
           {/* Colonna destra - Profilo utente */}
-          <Col xs={3} className="d-flex justify-content-end" style={{ paddingRight: '15%' }}>
+          <Col xs={3} className="d-flex justify-content-end" style={{ paddingRight: '10%' }}>
   <Dropdown align="end">
     <Dropdown.Toggle variant="secondary" id="dropdown-avatar" className="avatar-dropdown">
       <img

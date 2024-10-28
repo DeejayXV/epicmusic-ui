@@ -60,9 +60,9 @@ function LoginPage({ setIsAuthenticated }) {
             required
             className="auth-input"
           />
-          <button type="submit" className="auth-button">Accedi</button>
+          <button type="submit" className="auth-button">Login</button>
         </form>
-        <button onClick={() => navigate(-1)} className="auth-back-button">Indietro</button>
+        <p onClick={() => navigate(-1)} className="auth-back-button">Back</p>
       </div>
     </div>
   );

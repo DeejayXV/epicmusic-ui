@@ -1,5 +1,6 @@
 .content-container {
   margin-top: 70px;
+  background-color: #ffffff;
 }
 
 .sidebar-container {
@@ -20,7 +21,7 @@
 body {
   margin: 0;
   font-family: "Arial", sans-serif;
-  background-color: #ada6a6;
+  background-color: #ffffff;
 }
 
 h2 {

@@ -1,12 +1,12 @@
 .main-content {
-  margin-left: 200px;
+  /* margin-left: 200px; */
   padding: 20px;
   background-color: #898686;
   min-height: calc(100vh - 60px);
 }
 
 .album-details {
-  background-color: #ffffff;
+  background-color: #898686;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);

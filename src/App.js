@@ -84,7 +84,7 @@ const App = () => {
   };
 
   return (
-    <div className="app" style={{ margin: "0 10%" }}>
+    <div className="app">
       {!isAuthenticated ? (
         <Routes>
           <Route path="/" element={<InitialPage />} />

@@ -1,11 +1,18 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 .home-container {
   position: relative;
   height: 100vh;
-  background: url("https://source.unsplash.com/1600x900/?music") no-repeat center center/cover;
+  background-image: url("../assets/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  /* filter: blur(1px); */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
 }
 
 .overlay {
@@ -15,22 +22,25 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
+  color: #ffffff;
 }
 
 .title {
   font-size: 3rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
 .subtitle {
   font-size: 1.5rem;
+  font-weight: 300;
   margin-bottom: 30px;
 }
 
@@ -49,19 +59,19 @@
 }
 
 .register-button {
-  background: #1db954;
+  background: #162160;
   color: #fff;
 }
 
 .register-button:hover {
-  background: #17a743;
+  background: #223393;
 }
 
 .login-button {
   background: #fff;
-  color: #1db954;
+  color: #162160;
 }
 
 .login-button:hover {
-  background: #f0f0f0;
+  background: #c8c9d3;
 }

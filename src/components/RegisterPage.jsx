@@ -47,7 +47,7 @@ function RegisterPage() {
     <div className="auth-container">
       <div className="auth-overlay"></div>
       <div className="auth-content">
-        <h1 className="auth-title">Registrati</h1>
+        <h1 className="auth-title">Register</h1>
         <form onSubmit={handleSubmit} className="auth-form">
           <input
             type="text"
@@ -76,9 +76,9 @@ function RegisterPage() {
             required
             className="auth-input"
           />
-          <button type="submit" className="auth-button">Registrati</button>
+          <button type="submit" className="auth-button">Register</button>
         </form>
-        <button onClick={() => navigate(-1)} className="auth-back-button">Indietro</button>
+        <p onClick={() => navigate(-1)} className="auth-back-button">Back</p>
       </div>
     </div>
   );
