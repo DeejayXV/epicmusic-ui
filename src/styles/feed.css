@@ -76,10 +76,11 @@
 }
 
 .suggested-track-item {
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
 .suggested-track-item:hover {
-  background-color: #989898;
+  background-color: #ececec;
   cursor: pointer;
+  transform: scale(1.02);
 }

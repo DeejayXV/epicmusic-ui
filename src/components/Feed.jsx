@@ -69,7 +69,7 @@ const Feed = ({ setCurrentTrack }) => {
     <Container fluid className="feed-container">
       <Row>
         <Col xs={12} className="feed-main">
-          <h2 className="feed-title">Trending</h2>
+          <h2 className="feed-title">Trending Albums</h2>
           <div className="album-scroll-container">
             <Row className="flex-nowrap">
               {suggestedAlbums.map((album) => (

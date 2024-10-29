@@ -58,7 +58,7 @@ const TopBar = ({ onLogout, onSearch }) => {
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
-                <Button variant="outline-success" type="submit">
+                <Button variant="outline-info" type="submit">
                   Search
                 </Button>
               </Form>
