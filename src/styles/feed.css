@@ -15,10 +15,6 @@
   transition: transform 0.2s;
 }
 
-.album-title {
-  font-size: 0.5em;
-}
-
 .feed-card:hover {
   transform: scale(1.02);
 }
@@ -37,4 +33,39 @@
   background-color: #e6ffe6;
   padding: 15px;
   border-radius: 8px;
+}
+
+.album-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+.album-scroll-container .flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.album-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.album-scroll-container::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 4px;
+}
+
+.album-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.card-title-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-artist-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
