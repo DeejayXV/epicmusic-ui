@@ -96,7 +96,7 @@ const Feed = ({ setCurrentTrack }) => {
                     <Card.Img variant="top" src={artist.icons[0]?.url} alt={artist.name} />
                     <Card.Body>
                       <Card.Title className="card-title-ellipsis" style={{ fontSize: '14px' }}>{artist.name}</Card.Title>
-                      <Button onClick={() => navigate(`/artists/${artist.id}`)}>View Artist</Button>
+                      <Button onClick={() => navigate(`/artists/${artist.id}`)}>View Genre</Button>
                     </Card.Body>
                   </Card>
                 </Col>
