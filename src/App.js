@@ -97,7 +97,14 @@ const App = () => {
           <Container fluid className="content-container">
             <Row>
               <Col
-                md={9}
+                md={1}
+                className="sidebar-container"
+                style={{ overflowY: "auto", maxHeight: "89vh", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
+              >
+                <Sidebar />
+              </Col>
+              <Col
+                md={8}
                 className="main-content"
                 style={{ overflowY: "auto", maxHeight: "89vh", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
               >
@@ -113,13 +120,6 @@ const App = () => {
                   <Route path="/podcasts" element={<TrendingPodcasts playTrack={playTrack} />} />
                   <Route path="/search" element={<SearchResults results={searchResults} playTrack={playTrack} />} />
                 </Routes>
-              </Col>
-              <Col
-                md={1}
-                className="sidebar-container"
-                style={{ overflowY: "auto", maxHeight: "89vh", scrollbarWidth: "thin", scrollbarColor: "#8b8a8a" }}
-              >
-                <Sidebar />
               </Col>
             </Row>
           </Container>

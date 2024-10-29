@@ -1,6 +1,6 @@
 .featured-albums {
   padding: 20px;
-  margin-left: 5%;
+  /* margin-left: 5%; */
   margin-bottom: 80px;
 }
 
@@ -17,6 +17,7 @@
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: #f8f8f8;
+  text-decoration: none;
 }
 
 .album-card img {

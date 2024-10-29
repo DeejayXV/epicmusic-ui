@@ -36,7 +36,7 @@ const Feed = ({ setCurrentTrack }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setSuggestedAlbums(albumsResponse.data.albums.items.slice(0, 3));
+        setSuggestedAlbums(albumsResponse.data.albums.items.slice(0, 8));
 
         // Richiedi le tracce del giorno
         const tracksResponse = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
@@ -72,22 +72,20 @@ const Feed = ({ setCurrentTrack }) => {
   };
 
   return (
-    <Container fluid className="feed-container" style={{ marginRight: '10%' }}>
+    <Container fluid className="feed-container">
       <Row>
-        <Col xs={3} className="sidebar-container">
-          
-        </Col>
-        <Col xs={9} className="feed-main">
+        
+        <Col xs={12} className="feed-main">
           <h2 className="feed-title">Suggested Albums</h2>
           <Row>
             {suggestedAlbums.map((album) => (
-              <Col key={album.id} xs={6} md={4} className="mb-4">
-                <Card className="feed-card small-card">
+              <Col key={album.id} xs={6} md={3} className="mb-4">
+                <Card className="feed-card">
                   <Card.Img variant="top" src={album.images[0]?.url} alt={album.name} />
                   <Card.Body>
-                    <Card.Title>{album.name}</Card.Title>
-                    <Card.Text>By {album.artists.map(artist => artist.name).join(', ')}</Card.Text>
-                    <Button variant="primary" onClick={() => navigate(`/albums/${album.id}`)}>View Album</Button>
+                    <Card.Title style={{ fontSize: '14px' }}>{album.name}</Card.Title>
+                    <Card.Text style={{ fontSize: '12px' }}>By {album.artists.map(artist => artist.name).join(', ')}</Card.Text>
+                    <Button onClick={() => navigate(`/albums/${album.id}`)}>View Album</Button>
                   </Card.Body>
                 </Card>
               </Col>
@@ -98,7 +96,7 @@ const Feed = ({ setCurrentTrack }) => {
           <Row>
             {tracksOfTheDay.map((track) => (
               <Col key={track.id} xs={6} md={4} className="mb-4">
-                <Card className="feed-card small-card">
+                <Card className="feed-card">
                   <Card.Img variant="top" src={track.album.images[0]?.url} alt={track.name} />
                   <Card.Body>
                     <Card.Title>{track.name}</Card.Title>
@@ -110,7 +108,7 @@ const Feed = ({ setCurrentTrack }) => {
             ))}
           </Row>
 
-          <h2 className="feed-title mt-4">Suggested Tracks</h2>
+          {/* <h2 className="feed-title mt-4">Suggested Tracks</h2> */}
           <ListGroup className="suggested-tracks-list">
             {suggestedTracks.map((track, index) => (
               <ListGroup.Item key={index} className="suggested-track-item" action onClick={() => handlePlayTrack(track)}>
