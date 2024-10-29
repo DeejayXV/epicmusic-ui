@@ -35,3 +35,11 @@
   transform: scale(1.05);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
+
+.show-more-button {
+  color: white;
+  background-color: #8b8a8a;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 1em;
+}

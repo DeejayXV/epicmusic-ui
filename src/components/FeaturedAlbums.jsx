@@ -8,6 +8,7 @@ const FeaturedAlbums = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [token, setToken] = useState('');
+  const [offset, setOffset] = useState(0);
 
   // Ottieni il token dal backend
   useEffect(() => {
@@ -29,13 +30,12 @@ const FeaturedAlbums = () => {
       if (!token) return;
 
       try {
-        
-        const response = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
+        const response = await axios.get(`https://api.spotify.com/v1/browse/new-releases?limit=10&offset=${offset}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setAlbums(response.data.albums.items);
+        setAlbums((prevAlbums) => [...prevAlbums, ...response.data.albums.items]);
       } catch (error) {
         console.error('Error fetching albums:', error);
         setError('Error fetching albums.');
@@ -45,7 +45,11 @@ const FeaturedAlbums = () => {
     };
 
     fetchAlbums();
-  }, [token]);
+  }, [token, offset]);
+
+  const handleShowMore = () => {
+    setOffset((prevOffset) => prevOffset + 10);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -69,6 +73,7 @@ const FeaturedAlbums = () => {
           </div>
         ))}
       </div>
+      <p onClick={handleShowMore} className="show-more-button">Mostra Altro</p>
     </div>
   );
 };

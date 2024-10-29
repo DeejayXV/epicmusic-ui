@@ -46,7 +46,7 @@ const TrendingTracks = ({ playTrack }) => {
           tracksData.push(...playlistResponse.data.tracks.items.map(item => item.track));
         }
 
-        setTracks(tracksData.slice(0, 20)); // Limita a 20 tracce
+        setTracks(tracksData.slice(0, 40)); // Limita a 20 tracce
       } catch (error) {
         console.error('Error fetching tracks:', error);
         setError('Error fetching track data.');
