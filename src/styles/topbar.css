@@ -1,5 +1,6 @@
 .top-bar {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #050a30;
 }
 
 .search-input {
@@ -16,4 +17,8 @@
   height: 40px;
   object-fit: cover;
   margin-right: 5px;
+}
+
+.btn-search {
+  outline: #050a30;
 }
