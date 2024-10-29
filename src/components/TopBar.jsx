@@ -78,7 +78,7 @@ const TopBar = ({ onLogout, onSearch }) => {
 
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/account">Account</Dropdown.Item>
-                  <Dropdown.Item onClick={() => setShowProfileModal(true)}>Edit Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={() => setShowProfileModal(true)}>Profile</Dropdown.Item>
                   <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
