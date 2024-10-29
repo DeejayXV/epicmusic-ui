@@ -59,7 +59,7 @@ const Feed = ({ setCurrentTrack }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setTracksOfTheDay(playlistTracksResponse.data.tracks.items.slice(0, 3).map(item => item.track));
+        setTracksOfTheDay(playlistTracksResponse.data.tracks.items.slice(0, 4).map(item => item.track));
 
         // Richiedi le tracce suggerite
         const suggestedTracksResponse = await axios.get('https://api.spotify.com/v1/recommendations?seed_genres=pop', {
@@ -123,7 +123,7 @@ const Feed = ({ setCurrentTrack }) => {
           <h2 className="feed-title mt-4">Tracks of the Day</h2>
           <Row>
             {tracksOfTheDay.map((track) => (
-              <Col key={track.id} xs={6} md={4} className="mb-4">
+              <Col key={track.id} xs={6} md={3} className="mb-4">
                 <Card className="feed-card">
                   <Card.Img variant="top" src={track.album.images[0]?.url} alt={track.name} />
                   <Card.Body>
