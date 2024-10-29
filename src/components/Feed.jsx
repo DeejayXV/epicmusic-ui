@@ -44,7 +44,7 @@ const Feed = ({ setCurrentTrack }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setSuggestedArtists(artistsResponse.data.categories.items.slice(0, 8));
+        setSuggestedArtists(artistsResponse.data.categories.items.slice(0, 6));
 
         // Richiedi le tracce suggerite
         const suggestedTracksResponse = await axios.get('https://api.spotify.com/v1/recommendations?seed_genres=pop', {
