@@ -87,7 +87,7 @@ const Feed = ({ setCurrentTrack }) => {
             </Row>
           </div>
 
-          <h2 className="feed-title mt-4">Artists suggested for you!</h2>
+          <h2 className="feed-title mt-4">Genre suggested for you!</h2>
           <div className="artist-scroll-container">
             <Row className="flex-nowrap">
               {suggestedArtists.map((artist) => (
