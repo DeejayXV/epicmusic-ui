@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Table, Card, Button } from "react-bootstrap";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../styles/feed.css";
@@ -7,7 +7,6 @@ import "../styles/feed.css";
 const Feed = ({ setCurrentTrack }) => {
   const [suggestedAlbums, setSuggestedAlbums] = useState([]);
   const [suggestedArtists, setSuggestedArtists] = useState([]);
-  const [tracksOfTheDay, setTracksOfTheDay] = useState([]);
   const [suggestedTracks, setSuggestedTracks] = useState([]);
   const [token, setToken] = useState('');
   const navigate = useNavigate();
@@ -47,20 +46,6 @@ const Feed = ({ setCurrentTrack }) => {
         });
         setSuggestedArtists(artistsResponse.data.categories.items.slice(0, 8));
 
-        // Richiedi le tracce del giorno
-        const tracksResponse = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const playlistId = tracksResponse.data.playlists.items[0].id;
-        const playlistTracksResponse = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setTracksOfTheDay(playlistTracksResponse.data.tracks.items.slice(0, 4).map(item => item.track));
-
         // Richiedi le tracce suggerite
         const suggestedTracksResponse = await axios.get('https://api.spotify.com/v1/recommendations?seed_genres=pop', {
           headers: {
@@ -83,9 +68,8 @@ const Feed = ({ setCurrentTrack }) => {
   return (
     <Container fluid className="feed-container">
       <Row>
-        
         <Col xs={12} className="feed-main">
-          <h2 className="feed-title">Albums suggested for you!</h2>
+          <h2 className="feed-title">Trending</h2>
           <div className="album-scroll-container">
             <Row className="flex-nowrap">
               {suggestedAlbums.map((album) => (
@@ -120,31 +104,25 @@ const Feed = ({ setCurrentTrack }) => {
             </Row>
           </div>
 
-          <h2 className="feed-title mt-4">Tracks of the Day</h2>
-          <Row>
-            {tracksOfTheDay.map((track) => (
-              <Col key={track.id} xs={6} md={3} className="mb-4">
-                <Card className="feed-card">
-                  <Card.Img variant="top" src={track.album.images[0]?.url} alt={track.name} />
-                  <Card.Body>
-                    <Card.Title>{track.name}</Card.Title>
-                    <Card.Text>By {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
-                    <Button variant="outline-secondary" onClick={() => handlePlayTrack(track)}>Play</Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-
-          <ListGroup className="suggested-tracks-list">
-            {suggestedTracks.map((track, index) => (
-              <ListGroup.Item key={index} className="suggested-track-item" action onClick={() => handlePlayTrack(track)}>
-                <div>
-                  <strong>{track.name}</strong> - {track.artists.map(artist => artist.name).join(', ')}
-                </div>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+          <h2 className="feed-title mt-4">Suggested Tracks</h2>
+          <Table className="suggested-tracks-table" borderless>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              {suggestedTracks.map((track, index) => (
+                <tr key={index} className="suggested-track-item" onClick={() => handlePlayTrack(track)}>
+                  <td className="track-title-ellipsis" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{track.name}</td>
+                  <td className="track-artist-ellipsis" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{track.artists.map(artist => artist.name).join(', ')}</td>
+                  <td>{Math.floor(track.duration_ms / 60000)}:{(Math.floor((track.duration_ms % 60000) / 1000)).toString().padStart(2, '0')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Col>
       </Row>
     </Container>

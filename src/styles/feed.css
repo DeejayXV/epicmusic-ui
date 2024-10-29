@@ -25,7 +25,7 @@
   border-left: 1px solid #ddd;
 }
 
-.statistics-section {
+/* .statistics-section {
   margin-bottom: 20px;
 }
 
@@ -33,7 +33,7 @@
   background-color: #e6ffe6;
   padding: 15px;
   border-radius: 8px;
-}
+} */
 
 .album-scroll-container {
   overflow-x: auto;
@@ -68,4 +68,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.suggested-tracks-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.suggested-track-item {
+  transition: background-color 0.2s;
+}
+
+.suggested-track-item:hover {
+  background-color: #989898;
+  cursor: pointer;
 }
