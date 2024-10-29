@@ -40,7 +40,7 @@
 
 .progress-bar {
   height: 100%;
-  background-color: #1db954;
+  background-color: #0097b2;
   border-radius: 4px;
   transition: width 0.1s linear;
 }
@@ -55,5 +55,5 @@
 }
 
 .player-controls button:hover {
-  color: #1db954;
+  color: #0097b2;
 }

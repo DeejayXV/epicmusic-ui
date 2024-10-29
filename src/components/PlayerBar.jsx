@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaVolumeUp } from 'react-icons/fa';
 import '../styles/playerbar.css';
 
 const PlayerBar = ({ track, onNext, onPrevious }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0); // Progresso in millisecondi
+  const [volume, setVolume] = useState(50); // Stato per il volume
 
   useEffect(() => {
     let interval;
@@ -54,6 +56,10 @@ const PlayerBar = ({ track, onNext, onPrevious }) => {
     }
   };
 
+  const handleVolumeChange = (e) => {
+    setVolume(e.target.value);
+  };
+
   return (
     <div className="player-bar">
       {track ? (
@@ -80,11 +86,26 @@ const PlayerBar = ({ track, onNext, onPrevious }) => {
             ></div>
           </div>
           <div className="player-controls">
-            <button onClick={onPrevious}>⏮️</button>
-            <button onClick={handlePlayPause}>
-              {isPlaying ? '⏸️' : '▶️'}
+            <button onClick={onPrevious} className="control-button">
+              <FaStepBackward />
             </button>
-            <button onClick={onNext}>⏭️</button>
+            <button onClick={handlePlayPause} className="control-button">
+              {isPlaying ? <FaPause /> : <FaPlay />}
+            </button>
+            <button onClick={onNext} className="control-button">
+              <FaStepForward />
+            </button>
+          </div>
+          <div className="volume-control">
+            <FaVolumeUp style={{ marginRight: '10px' }} />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={volume}
+              onChange={handleVolumeChange}
+              className="volume-slider"
+            />
           </div>
         </>
       ) : (
