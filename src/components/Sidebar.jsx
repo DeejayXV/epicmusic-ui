@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosConfig';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { FaHome, FaMusic, FaCompactDisc, FaUserAlt, FaPodcast } from 'react-icons/fa';
 import '../styles/sidebar.css';
 
 const Sidebar = () => {
@@ -53,14 +54,24 @@ const Sidebar = () => {
   return (
     <div className="sidebar" style={{ overflowY: 'auto', maxHeight: '100vh', scrollbarWidth: 'thin', scrollbarColor: '#A8A8A8' }}>
       <nav className="menu">
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <FaHome style={{ marginRight: '10px' }} /> Home
+        </Link>
       </nav>
       <h4 className='miniTitle mt-4'>My Collection</h4>
       <nav className="menu">
-        <Link to="/albums">Albums</Link>
-        <Link to="/tracks">Tracks</Link>
-        <Link to="/artists">Artists</Link>
-        <Link to="/podcasts">Podcasts</Link>
+        <Link to="/albums">
+          <FaCompactDisc style={{ marginRight: '10px' }} /> Albums
+        </Link>
+        <Link to="/tracks">
+          <FaMusic style={{ marginRight: '10px' }} /> Tracks
+        </Link>
+        <Link to="/artists">
+          <FaUserAlt style={{ marginRight: '10px' }} /> Artists
+        </Link>
+        <Link to="/podcasts">
+          <FaPodcast style={{ marginRight: '10px' }} /> Podcasts
+        </Link>
       </nav>
       <div className="user-playlists">
         <h4 className='miniTitle mt-4'>Your Playlists</h4>
